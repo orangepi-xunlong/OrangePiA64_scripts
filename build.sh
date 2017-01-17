@@ -99,6 +99,10 @@ ROOTFS_check()
 	done
 }
 
+if [ ! -d $ROOT/output ]; then
+    mkdir -p $ROOT/output
+fi
+
 MENUSTR="Welcome to OrangePi Build System. Pls choose Platform."
 ##########################################
 OPTION=$(whiptail --title "OrangePi Build System" \
@@ -143,7 +147,7 @@ done
 echo $PASSWD | sudo ls &> /dev/null 2>&1
 
 ## Check cross tools
-if [ ! -d $ROOT/toolchain ]; then
+if [ ! -d $ROOT/toolchain/gcc-linaro-aarch ]; then
 	cd $SCRIPTS
 	./install_toolchain.sh
 	cd -
